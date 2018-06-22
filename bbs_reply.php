@@ -11,10 +11,10 @@ include 'configure.php';
 $content = $_POST["content"];//内容id
 $captcha = $_POST["captcha"];//验证码
 $id = $_POST["id"];//帖子
-
+session_start();
 $conn=mysqli_connect("$db_host","$db_user","$db_pwd");
 
-if (!($_POST["check"]==$_SESSION["check"]) ||$conn->connect_error || mysqli_select_db($conn,"bbs_reply")) {
+if (!($captcha==$_SESSION["check"]) ||$conn->connect_error || mysqli_select_db($conn,"bbs_reply")) {
     $arr = array('msgcode'=>0);
     echo json_encode($arr);
 }
